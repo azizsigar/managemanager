@@ -1,16 +1,20 @@
 const postModel = require('../models/postModels');
+// const commentModel =require('../models/commentModels');
+const commentModels = require('../models/commentModels');
 
 const homePage = (req,res)=>{
-    postModel.find()
-    .then(data => {
-        // heeeeeere
-        res.render("index", {
-            posts:data
-        })
-    })
-    .catch(err=>{
-        console.log(err)
-    })
+     postModel.find()   
+     .populate(("comments"))
+     .sort({created_at: -1})
+     .then(data => {
+             res.render("index", {
+             posts:data
+         })
+     })
+     .catch(err=>{
+         console.log(err)
+     })
+    
 }
 const CreateNewPostPage =(req,res)=>{
     res.render('new-post',{

@@ -12,7 +12,30 @@
         <div>
             <h2><%= post.title %></h2>
             <h6><%= post.desc %></h6>
+            <div>
+                <form method="post" action="/add-comment/<%= post.id %>">
+                    <input name="comment" placeholder="comment">
+                    <button>add comment</button>
+                </form>
+                <div>
+                    <% if(post.comments.length > 0) { %>
+                    <% post.comments.forEach(comment => { %>
+                        <div>
+                            <h4><%= comment.comment %></h4>
+                        </div>
+                        <% })%>
+                        <% } %>
+                </div>
+            </div>
+
         </div>
         <% }) %>
+
+        <!-- commentModel.find()
+    .populate('post_id')
+    .then(data => {
+        console.log(data)
+    })
+    .catch(err => {console.log(err)}) -->
 </body>
 </html>
